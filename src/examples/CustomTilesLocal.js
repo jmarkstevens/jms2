@@ -1,9 +1,6 @@
 import React from 'react';
 import {
-  StyleSheet,
-  View,
-  Text,
-  Dimensions,
+  StyleSheet, View, Text, Dimensions,
 } from 'react-native';
 
 import MapView, {
@@ -37,8 +34,9 @@ class CustomTiles extends React.Component {
 
   get mapType() {
     // MapKit does not support 'none' as a base map
-    return this.props.provider === PROVIDER_DEFAULT ?
-      MAP_TYPES.STANDARD : MAP_TYPES.NONE;
+    return this.props.provider === PROVIDER_DEFAULT
+      ? MAP_TYPES.STANDARD
+      : MAP_TYPES.NONE;
   }
 
   render() {

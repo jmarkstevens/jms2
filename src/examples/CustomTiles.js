@@ -1,12 +1,14 @@
 import React from 'react';
 import {
-  StyleSheet,
-  View,
-  Text,
-  Dimensions,
+  StyleSheet, View, Text, Dimensions,
 } from 'react-native';
 
-import MapView, { MAP_TYPES, PROVIDER_DEFAULT, ProviderPropType, UrlTile } from 'react-native-maps';
+import MapView, {
+  MAP_TYPES,
+  PROVIDER_DEFAULT,
+  ProviderPropType,
+  UrlTile,
+} from 'react-native-maps';
 
 const { width, height } = Dimensions.get('window');
 
@@ -32,8 +34,9 @@ class CustomTiles extends React.Component {
 
   get mapType() {
     // MapKit does not support 'none' as a base map
-    return this.props.provider === PROVIDER_DEFAULT ?
-      MAP_TYPES.STANDARD : MAP_TYPES.NONE;
+    return this.props.provider === PROVIDER_DEFAULT
+      ? MAP_TYPES.STANDARD
+      : MAP_TYPES.NONE;
   }
 
   render() {

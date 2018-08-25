@@ -1,9 +1,5 @@
 import React, { Component } from 'react';
-import {
-  StyleSheet,
-  View,
-  Dimensions,
-} from 'react-native';
+import { StyleSheet, View, Dimensions } from 'react-native';
 
 import MapView from 'react-native-maps';
 
@@ -24,7 +20,6 @@ const OVERLAY_BOTTOM_RIGHT_COORDINATE2 = [35.67514743608467, 139.76806640625];
 const IMAGE_URL2 = 'https://maps.gsi.go.jp/xyz/std/17/116423/51615.png';
 
 export default class ImageOverlayWithURL extends Component {
-
   static propTypes = {
     provider: MapView.ProviderPropType,
   };
@@ -40,17 +35,24 @@ export default class ImageOverlayWithURL extends Component {
         longitudeDelta: LONGITUDE_DELTA,
       },
       overlay1: {
-        bounds: [OVERLAY_TOP_LEFT_COORDINATE1, OVERLAY_BOTTOM_RIGHT_COORDINATE1],
+        bounds: [
+          OVERLAY_TOP_LEFT_COORDINATE1,
+          OVERLAY_BOTTOM_RIGHT_COORDINATE1,
+        ],
         image: IMAGE_URL1,
       },
       overlay2: {
-        bounds: [OVERLAY_TOP_LEFT_COORDINATE2, OVERLAY_BOTTOM_RIGHT_COORDINATE2],
+        bounds: [
+          OVERLAY_TOP_LEFT_COORDINATE2,
+          OVERLAY_BOTTOM_RIGHT_COORDINATE2,
+        ],
         image: IMAGE_URL2,
       },
     };
   }
 
   render() {
+    const { overlay1, overlay2 } = this.state;
     return (
       <View style={styles.container}>
         <MapView
@@ -59,13 +61,13 @@ export default class ImageOverlayWithURL extends Component {
           initialRegion={this.state.region}
         >
           <MapView.Overlay
-            bounds={this.state.overlay1.bounds}
-            image={this.state.overlay1.image}
+            bounds={overlay1.bounds}
+            image={overlay1.image}
             zindex={2}
           />
           <MapView.Overlay
-            bounds={this.state.overlay2.bounds}
-            image={this.state.overlay2.image}
+            bounds={overlay2.bounds}
+            image={overlay2.image}
           />
         </MapView>
       </View>

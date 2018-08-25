@@ -1,9 +1,6 @@
 import React from 'react';
 import {
-  StyleSheet,
-  View,
-  Text,
-  Dimensions,
+  StyleSheet, View, Text, Dimensions,
 } from 'react-native';
 
 import MapView, { Callout, Marker, ProviderPropType } from 'react-native-maps';
@@ -51,13 +48,17 @@ class OnPoiClick extends React.Component {
           onPoiClick={this.onPoiClick}
         >
           {this.state.poi && (
-            <Marker
-              coordinate={this.state.poi.coordinate}
-            >
+            <Marker coordinate={this.state.poi.coordinate}>
               <Callout>
                 <View>
-                  <Text>Place Id: { this.state.poi.placeId }</Text>
-                  <Text>Name: { this.state.poi.name }</Text>
+                  <Text>
+Place Id:
+                    {this.state.poi.placeId}
+                  </Text>
+                  <Text>
+Name:
+                    {this.state.poi.name}
+                  </Text>
                 </View>
               </Callout>
             </Marker>

@@ -70,16 +70,15 @@ class Callouts extends React.Component {
           initialRegion={region}
         >
           <Marker
-            ref={ref => { this.marker1 = ref; }}
+            ref={(ref) => {
+              this.marker1 = ref;
+            }}
             coordinate={markers[0].coordinate}
             title="This is a native view"
             description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation" // eslint-disable-line max-len
           />
-          <Marker
-            coordinate={markers[1].coordinate}
-          >
+          <Marker coordinate={markers[1].coordinate}>
             <Callout style={styles.plainView}>
-
               <View>
                 <Text>This is a plain view</Text>
               </View>
@@ -103,10 +102,16 @@ class Callouts extends React.Component {
           </View>
         </View>
         <View style={styles.buttonContainer}>
-          <TouchableOpacity onPress={() => this.show()} style={[styles.bubble, styles.button]}>
+          <TouchableOpacity
+            onPress={() => this.show()}
+            style={[styles.bubble, styles.button]}
+          >
             <Text>Show</Text>
           </TouchableOpacity>
-          <TouchableOpacity onPress={() => this.hide()} style={[styles.bubble, styles.button]}>
+          <TouchableOpacity
+            onPress={() => this.hide()}
+            style={[styles.bubble, styles.button]}
+          >
             <Text>Hide</Text>
           </TouchableOpacity>
         </View>

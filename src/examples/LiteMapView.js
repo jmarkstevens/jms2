@@ -1,9 +1,5 @@
 import React from 'react';
-import {
-  StyleSheet,
-  Dimensions,
-  ScrollView,
-} from 'react-native';
+import { StyleSheet, Dimensions, ScrollView } from 'react-native';
 
 import MapView from 'react-native-maps';
 
@@ -22,26 +18,20 @@ const SAMPLE_REGION = {
   longitudeDelta: LONGITUDE_DELTA,
 };
 
-class LiteMapView extends React.Component {
-  render() {
-    const maps = [];
-    for (let i = 0; i < 10; i++) {
-      maps.push(
-        <MapView
-          liteMode
-          key={`map_${i}`}
-          style={styles.map}
-          initialRegion={SAMPLE_REGION}
-        />
-      );
-    }
-    return (
-      <ScrollView style={StyleSheet.absoluteFillObject}>
-        {maps}
-      </ScrollView>
+const LiteMapView = () => {
+  const maps = [];
+  for (let i = 0; i < 10; i++) {
+    maps.push(
+      <MapView
+        liteMode
+        key={`map_${i}`}
+        style={styles.map}
+        initialRegion={SAMPLE_REGION}
+      />,
     );
   }
-}
+  return <ScrollView style={StyleSheet.absoluteFillObject}>{maps}</ScrollView>;
+};
 
 const styles = StyleSheet.create({
   map: {

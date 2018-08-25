@@ -1,12 +1,14 @@
 import React from 'react';
 import {
-  StyleSheet,
-  View,
-  Text,
-  Dimensions,
+  StyleSheet, View, Text, Dimensions,
 } from 'react-native';
 
-import MapView, { Circle, Polygon, Polyline, ProviderPropType } from 'react-native-maps';
+import MapView, {
+  Circle,
+  Polygon,
+  Polyline,
+  ProviderPropType,
+} from 'react-native-maps';
 
 const { width, height } = Dimensions.get('window');
 
@@ -55,15 +57,15 @@ class Overlays extends React.Component {
           longitude: LONGITUDE - SPACE,
         },
         {
-          latitude: LATITUDE - (2 * SPACE),
-          longitude: LONGITUDE + (2 * SPACE),
+          latitude: LATITUDE - 2 * SPACE,
+          longitude: LONGITUDE + 2 * SPACE,
         },
         {
           latitude: LATITUDE - SPACE,
           longitude: LONGITUDE - SPACE,
         },
         {
-          latitude: LATITUDE - (2 * SPACE),
+          latitude: LATITUDE - 2 * SPACE,
           longitude: LONGITUDE - SPACE,
         },
       ],
@@ -71,7 +73,9 @@ class Overlays extends React.Component {
   }
 
   render() {
-    const { region, circle, polygon, polyline } = this.state;
+    const {
+      region, circle, polygon, polyline,
+    } = this.state;
     return (
       <View style={styles.container}>
         <MapView

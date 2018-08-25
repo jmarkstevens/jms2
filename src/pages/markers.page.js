@@ -1,13 +1,16 @@
-import React from 'react';
+import * as React from 'react';
 import {
-  StyleSheet,
-  View,
-  Text,
   Dimensions,
+  Text,
   TouchableOpacity,
+  View,
 } from 'react-native';
 
-import MapView, { Marker, ProviderPropType } from 'react-native-maps';
+// tslint:disable-next-line:import-name
+import MapView, { Marker } from 'react-native-maps';
+
+import PriceMarker from '../markers/PriceMarker';
+import styles from './markers.style';
 
 const { width, height } = Dimensions.get('window');
 
@@ -22,8 +25,12 @@ function randomColor() {
   return `#${Math.floor(Math.random() * 16777215).toString(16)}`;
 }
 
+function getRandomArbitrary() {
+  return Math.floor(Math.random() * (1500 - 500) + 500);
+}
+
 class DefaultMarkers extends React.Component {
-  constructor(props) {
+  constructor(props: any) {
     super(props);
 
     this.state = {
@@ -37,34 +44,38 @@ class DefaultMarkers extends React.Component {
     };
   }
 
-  onMapPress(e) {
+  onMapPress(e: any) {
+    const { markers } = this.state;
     this.setState({
       markers: [
-        ...this.state.markers,
+        ...markers,
         {
           coordinate: e.nativeEvent.coordinate,
-          key: id++,
+          key: id += 1,
           color: randomColor(),
+          amount: getRandomArbitrary(),
         },
       ],
     });
   }
 
   render() {
+    const { markers, region } = this.state;
     return (
       <View style={styles.container}>
         <MapView
-          provider={this.props.provider}
           style={styles.map}
-          initialRegion={this.state.region}
+          initialRegion={region}
           onPress={e => this.onMapPress(e)}
         >
-          {this.state.markers.map(marker => (
+          {markers.map((marker: any) => (
             <Marker
               key={marker.key}
               coordinate={marker.coordinate}
               pinColor={marker.color}
-            />
+            >
+              <PriceMarker amount={marker.amount} />
+            </Marker>
           ))}
         </MapView>
         <View style={styles.buttonContainer}>
@@ -72,48 +83,12 @@ class DefaultMarkers extends React.Component {
             onPress={() => this.setState({ markers: [] })}
             style={styles.bubble}
           >
-            <Text>Tap to create a marker of random color</Text>
+            <Text>Tap to clear markers</Text>
           </TouchableOpacity>
         </View>
       </View>
     );
   }
 }
-
-DefaultMarkers.propTypes = {
-  provider: ProviderPropType,
-};
-
-const styles = StyleSheet.create({
-  container: {
-    ...StyleSheet.absoluteFillObject,
-    justifyContent: 'flex-end',
-    alignItems: 'center',
-  },
-  map: {
-    ...StyleSheet.absoluteFillObject,
-  },
-  bubble: {
-    backgroundColor: 'rgba(255,255,255,0.7)',
-    paddingHorizontal: 18,
-    paddingVertical: 12,
-    borderRadius: 20,
-  },
-  latlng: {
-    width: 200,
-    alignItems: 'stretch',
-  },
-  button: {
-    width: 80,
-    paddingHorizontal: 12,
-    alignItems: 'center',
-    marginHorizontal: 10,
-  },
-  buttonContainer: {
-    flexDirection: 'row',
-    marginVertical: 20,
-    backgroundColor: 'transparent',
-  },
-});
 
 export default DefaultMarkers;

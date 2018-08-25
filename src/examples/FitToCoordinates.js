@@ -20,8 +20,8 @@ const SPACE = 0.01;
 
 function createMarker(modifier = 1) {
   return {
-    latitude: LATITUDE - (SPACE * modifier),
-    longitude: LONGITUDE - (SPACE * modifier),
+    latitude: LATITUDE - SPACE * modifier,
+    longitude: LONGITUDE - SPACE * modifier,
   };
 }
 
@@ -32,12 +32,16 @@ const MARKERS = [
   createMarker(4),
 ];
 
-const DEFAULT_PADDING = { top: 40, right: 40, bottom: 40, left: 40 };
+const DEFAULT_PADDING = {
+  top: 40, right: 40, bottom: 40, left: 40,
+};
 
 class FitToCoordinates extends React.Component {
   fitPadding() {
     this.map.fitToCoordinates([MARKERS[2], MARKERS[3]], {
-      edgePadding: { top: 100, right: 100, bottom: 100, left: 100 },
+      edgePadding: {
+        top: 100, right: 100, bottom: 100, left: 100,
+      },
       animated: true,
     });
   }
@@ -60,7 +64,9 @@ class FitToCoordinates extends React.Component {
     return (
       <View style={styles.container}>
         <MapView
-          ref={ref => { this.map = ref; }}
+          ref={(ref) => {
+            this.map = ref;
+          }}
           style={styles.map}
           initialRegion={{
             latitude: LATITUDE,
@@ -70,10 +76,7 @@ class FitToCoordinates extends React.Component {
           }}
         >
           {MARKERS.map((marker, i) => (
-            <Marker
-              key={i}
-              coordinate={marker}
-            />
+            <Marker key={i} coordinate={marker} />
           ))}
         </MapView>
         <View style={styles.buttonContainer}>

@@ -1,17 +1,13 @@
 import React, { Component } from 'react';
 
 import {
-  View,
-  StyleSheet,
-  TouchableOpacity,
-  Text,
+  View, StyleSheet, TouchableOpacity, Text,
 } from 'react-native';
 
 import MapView from 'react-native-maps';
 import carImage from './assets/car.png';
 
 export default class NavigationMap extends Component {
-
   constructor(props) {
     super(props);
     this.state = {
@@ -26,14 +22,7 @@ export default class NavigationMap extends Component {
     this.updateMap = this.updateMap.bind(this);
   }
 
-  changePosition(latOffset, lonOffset) {
-    const latitude = this.state.curPos.latitude + latOffset;
-    const longitude = this.state.curPos.longitude + lonOffset;
-    this.setState({ prevPos: this.state.curPos, curPos: { latitude, longitude } });
-    this.updateMap();
-  }
-
-  getRotation(prevPos, curPos) {
+  getRotation = (prevPos, curPos) => {
     if (!prevPos) return 0;
     const xDiff = curPos.latitude - prevPos.latitude;
     const yDiff = curPos.longitude - prevPos.longitude;
@@ -46,11 +35,21 @@ export default class NavigationMap extends Component {
     this.map.animateToNavigation(curPos, curRot, curAng);
   }
 
+  changePosition(latOffset, lonOffset) {
+    const latitude = this.state.curPos.latitude + latOffset;
+    const longitude = this.state.curPos.longitude + lonOffset;
+    this.setState({
+      prevPos: this.state.curPos,
+      curPos: { latitude, longitude },
+    });
+    this.updateMap();
+  }
+
   render() {
     return (
       <View style={styles.flex}>
         <MapView
-          ref={(el) => (this.map = el)}
+          ref={el => (this.map = el)}
           style={styles.flex}
           minZoomLevel={15}
           initialRegion={{

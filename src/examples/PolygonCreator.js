@@ -7,7 +7,11 @@ import {
   TouchableOpacity,
 } from 'react-native';
 
-import MapView, { MAP_TYPES, Polygon, ProviderPropType } from 'react-native-maps';
+import MapView, {
+  MAP_TYPES,
+  Polygon,
+  ProviderPropType,
+} from 'react-native-maps';
 
 const { width, height } = Dimensions.get('window');
 
@@ -35,13 +39,38 @@ class PolygonCreator extends React.Component {
     };
   }
 
-  finish() {
-    const { polygons, editing } = this.state;
-    this.setState({
-      polygons: [...polygons, editing],
-      editing: null,
-      creatingHole: false,
-    });
+  onPress(e) {
+    const { editing, creatingHole } = this.state;
+    if (!editing) {
+      this.setState({
+        editing: {
+          id: id += 1,
+          coordinates: [e.nativeEvent.coordinate],
+          holes: [],
+        },
+      });
+    } else if (!creatingHole) {
+      this.setState({
+        editing: {
+          ...editing,
+          coordinates: [...editing.coordinates, e.nativeEvent.coordinate],
+        },
+      });
+    } else {
+      const holes = [...editing.holes];
+      holes[holes.length - 1] = [
+        ...holes[holes.length - 1],
+        e.nativeEvent.coordinate,
+      ];
+      this.setState({
+        editing: {
+          ...editing,
+          id: id += 1, // keep incrementing id to trigger display refresh
+          coordinates: [...editing.coordinates],
+          holes,
+        },
+      });
+    }
   }
 
   createHole() {
@@ -51,10 +80,7 @@ class PolygonCreator extends React.Component {
         creatingHole: true,
         editing: {
           ...editing,
-          holes: [
-            ...editing.holes,
-            [],
-          ],
+          holes: [...editing.holes, []],
         },
       });
     } else {
@@ -72,43 +98,13 @@ class PolygonCreator extends React.Component {
     }
   }
 
-  onPress(e) {
-    const { editing, creatingHole } = this.state;
-    if (!editing) {
-      this.setState({
-        editing: {
-          id: id++,
-          coordinates: [e.nativeEvent.coordinate],
-          holes: [],
-        },
-      });
-    } else if (!creatingHole) {
-      this.setState({
-        editing: {
-          ...editing,
-          coordinates: [
-            ...editing.coordinates,
-            e.nativeEvent.coordinate,
-          ],
-        },
-      });
-    } else {
-      const holes = [...editing.holes];
-      holes[holes.length - 1] = [
-        ...holes[holes.length - 1],
-        e.nativeEvent.coordinate,
-      ];
-      this.setState({
-        editing: {
-          ...editing,
-          id: id++, // keep incrementing id to trigger display refresh
-          coordinates: [
-            ...editing.coordinates,
-          ],
-          holes,
-        },
-      });
-    }
+  finish() {
+    const { polygons, editing } = this.state;
+    this.setState({
+      polygons: [...polygons, editing],
+      editing: null,
+      creatingHole: false,
+    });
   }
 
   render() {
@@ -158,7 +154,9 @@ class PolygonCreator extends React.Component {
               onPress={() => this.createHole()}
               style={[styles.bubble, styles.button]}
             >
-              <Text>{this.state.creatingHole ? 'Finish Hole' : 'Create Hole'}</Text>
+              <Text>
+                {this.state.creatingHole ? 'Finish Hole' : 'Create Hole'}
+              </Text>
             </TouchableOpacity>
           )}
           {this.state.editing && (

@@ -1,9 +1,5 @@
 import React from 'react';
-import {
-  StyleSheet,
-  View,
-  Dimensions,
-} from 'react-native';
+import { StyleSheet, View, Dimensions } from 'react-native';
 
 import MapView, { Marker, ProviderPropType } from 'react-native-maps';
 import PriceMarker from './PriceMarker';
@@ -18,7 +14,7 @@ const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
 const SPACE = 0.01;
 
 function log(eventName, e) {
-  console.log(eventName, e.nativeEvent);
+  console.info(eventName, e.nativeEvent);
 }
 
 class MarkerTypes extends React.Component {
@@ -52,22 +48,22 @@ class MarkerTypes extends React.Component {
         >
           <Marker
             coordinate={this.state.a}
-            onSelect={(e) => log('onSelect', e)}
-            onDrag={(e) => log('onDrag', e)}
-            onDragStart={(e) => log('onDragStart', e)}
-            onDragEnd={(e) => log('onDragEnd', e)}
-            onPress={(e) => log('onPress', e)}
+            onSelect={e => log('onSelect', e)}
+            onDrag={e => log('onDrag', e)}
+            onDragStart={e => log('onDragStart', e)}
+            onDragEnd={e => log('onDragEnd', e)}
+            onPress={e => log('onPress', e)}
             draggable
           >
             <PriceMarker amount={99} />
           </Marker>
           <Marker
             coordinate={this.state.b}
-            onSelect={(e) => log('onSelect', e)}
-            onDrag={(e) => log('onDrag', e)}
-            onDragStart={(e) => log('onDragStart', e)}
-            onDragEnd={(e) => log('onDragEnd', e)}
-            onPress={(e) => log('onPress', e)}
+            onSelect={e => log('onSelect', e)}
+            onDrag={e => log('onDrag', e)}
+            onDragStart={e => log('onDragStart', e)}
+            onDragEnd={e => log('onDragEnd', e)}
+            onPress={e => log('onPress', e)}
             draggable
           />
         </MapView>

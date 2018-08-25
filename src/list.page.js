@@ -1,14 +1,17 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import {
   Platform,
   View,
-  StyleSheet,
   TouchableOpacity,
   ScrollView,
+  StyleSheet,
   Text,
   Switch,
 } from 'react-native';
 import { PROVIDER_GOOGLE, PROVIDER_DEFAULT } from 'react-native-maps';
+
+import styles from './list.style';
 import DisplayLatLng from './examples/DisplayLatLng';
 import ViewsAsMarkers from './examples/ViewsAsMarkers';
 import EventListener from './examples/EventListener';
@@ -42,9 +45,65 @@ import ImageOverlayWithAssets from './examples/ImageOverlayWithAssets';
 import ImageOverlayWithURL from './examples/ImageOverlayWithURL';
 import AnimatedNavigation from './examples/AnimatedNavigation';
 import OnPoiClick from './examples/OnPoiClick';
+import PriceMarkers from './pages/markers.page';
 
 const IOS = Platform.OS === 'ios';
 const ANDROID = Platform.OS === 'android';
+
+const listAll = [
+  // [<component>, <component description>, <Google compatible>, <Google add'l description>]
+  [PriceMarkers, 'PriceMarkers', true],
+  [StaticMap, 'StaticMap', true],
+  [DisplayLatLng, 'Tracking Position', true, '(incomplete)'],
+  [ViewsAsMarkers, 'Arbitrary Views as Markers', true],
+  [EventListener, 'Events', true, '(incomplete)'],
+  [MarkerTypes, 'Image Based Markers', true],
+  [DraggableMarkers, 'Draggable Markers', true],
+  [PolygonCreator, 'Polygon Creator', true],
+  [PolylineCreator, 'Polyline Creator', true],
+  [GradientPolylines, 'Gradient Polylines', true],
+  [AnimatedViews, 'Animating with MapViews'],
+  [AnimatedMarkers, 'Animated Marker Position'],
+  [Callouts, 'Custom Callouts', true],
+  [Overlays, 'Circles, Polygons, and Polylines', true],
+  [DefaultMarkers, 'Default Markers', true],
+  [CustomMarkers, 'Custom Markers', true],
+  [TakeSnapshot, 'Take Snapshot', true, '(incomplete)'],
+  [CachedMap, 'Cached Map'],
+  [LoadingMap, 'Map with loading'],
+  [FitToSuppliedMarkers, 'Focus Map On Markers', true],
+  [FitToCoordinates, 'Fit Map To Coordinates', true],
+  [LiteMapView, 'Android Lite MapView'],
+  [CustomTiles, 'Custom Tiles', true],
+  [ZIndexMarkers, 'Position Markers with Z-index', true],
+  [MapStyle, 'Customize the style of the map', true],
+  [LegalLabel, 'Reposition the legal label', true],
+  [SetNativePropsOverlays, 'Update native props', true],
+  [CustomOverlay, 'Custom Overlay Component', true],
+  [MapKml, 'Load Map with KML', true],
+  [BugMarkerWontUpdate, "BUG: Marker Won't Update (Android)", true],
+  [ImageOverlayWithAssets, 'Image Overlay Component with Assets', true],
+  [ImageOverlayWithURL, 'Image Overlay Component with URL', true],
+  [AnimatedNavigation, 'Animated Map Navigation', true],
+  [OnPoiClick, 'On Poi Click', true],
+];
+
+const listOne = [
+  [PriceMarkers, 'PriceMarkers', true],
+  [StaticMap, 'StaticMap', true],
+  [ViewsAsMarkers, 'Arbitrary Views as Markers', true],
+  [MarkerTypes, 'Image Based Markers', true],
+  [Callouts, 'Custom Callouts', true],
+  [DefaultMarkers, 'Default Markers', true],
+  [CustomMarkers, 'Custom Markers', true],
+  [FitToSuppliedMarkers, 'Focus Map On Markers', true],
+  [FitToCoordinates, 'Fit Map To Coordinates', true],
+  [ZIndexMarkers, 'Position Markers with Z-index', true],
+  [MapStyle, 'Customize the style of the map', true],
+  [LegalLabel, 'Reposition the legal label', true],
+];
+
+const viewLists = [listOne, listAll];
 
 function makeExampleMapper(useGoogleMaps) {
   if (useGoogleMaps) {
@@ -56,7 +115,7 @@ function makeExampleMapper(useGoogleMaps) {
   return example => example;
 }
 
-class App extends React.Component {
+class ListPage extends React.Component {
   constructor(props) {
     super(props);
 
@@ -90,13 +149,14 @@ class App extends React.Component {
   }
 
   renderGoogleSwitch() {
+    const { useGoogleMaps } = this.state;
     return (
       <View>
         <Text>Use GoogleMaps?</Text>
         <Switch
           onValueChange={value => this.setState({ useGoogleMaps: value })}
           style={{ marginBottom: 10 }}
-          value={this.state.useGoogleMaps}
+          value={useGoogleMaps}
         />
       </View>
     );
@@ -104,7 +164,6 @@ class App extends React.Component {
 
   renderExamples(examples) {
     const { Component, useGoogleMaps } = this.state;
-
     return (
       <View style={styles.container}>
         {Component && (
@@ -128,81 +187,25 @@ class App extends React.Component {
   }
 
   render() {
+    const { useGoogleMaps } = this.state;
+    const { listNbr } = this.props;
+    const viewList = viewLists[listNbr];
     return this.renderExamples(
-      [
-        // [<component>, <component description>, <Google compatible>, <Google add'l description>]
-        [StaticMap, 'StaticMap', true],
-        [DisplayLatLng, 'Tracking Position', true, '(incomplete)'],
-        [ViewsAsMarkers, 'Arbitrary Views as Markers', true],
-        [EventListener, 'Events', true, '(incomplete)'],
-        [MarkerTypes, 'Image Based Markers', true],
-        [DraggableMarkers, 'Draggable Markers', true],
-        [PolygonCreator, 'Polygon Creator', true],
-        [PolylineCreator, 'Polyline Creator', true],
-        [GradientPolylines, 'Gradient Polylines', true],
-        [AnimatedViews, 'Animating with MapViews'],
-        [AnimatedMarkers, 'Animated Marker Position'],
-        [Callouts, 'Custom Callouts', true],
-        [Overlays, 'Circles, Polygons, and Polylines', true],
-        [DefaultMarkers, 'Default Markers', true],
-        [CustomMarkers, 'Custom Markers', true],
-        [TakeSnapshot, 'Take Snapshot', true, '(incomplete)'],
-        [CachedMap, 'Cached Map'],
-        [LoadingMap, 'Map with loading'],
-        [FitToSuppliedMarkers, 'Focus Map On Markers', true],
-        [FitToCoordinates, 'Fit Map To Coordinates', true],
-        [LiteMapView, 'Android Lite MapView'],
-        [CustomTiles, 'Custom Tiles', true],
-        [ZIndexMarkers, 'Position Markers with Z-index', true],
-        [MapStyle, 'Customize the style of the map', true],
-        [LegalLabel, 'Reposition the legal label', true],
-        [SetNativePropsOverlays, 'Update native props', true],
-        [CustomOverlay, 'Custom Overlay Component', true],
-        [MapKml, 'Load Map with KML', true],
-        [BugMarkerWontUpdate, "BUG: Marker Won't Update (Android)", true],
-        [ImageOverlayWithAssets, 'Image Overlay Component with Assets', true],
-        [ImageOverlayWithURL, 'Image Overlay Component with URL', true],
-        [AnimatedNavigation, 'Animated Map Navigation', true],
-        [OnPoiClick, 'On Poi Click', true],
-      ]
+      viewList
         // Filter out examples that are not yet supported for Google Maps on iOS.
-        .filter(
-          example => ANDROID || (IOS && (example[2] || !this.state.useGoogleMaps)),
-        )
-        .map(makeExampleMapper(IOS && this.state.useGoogleMaps)),
+        .filter(example => ANDROID || (IOS && (example[2] || !useGoogleMaps)))
+        .map(makeExampleMapper(IOS && useGoogleMaps)),
     );
   }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    ...StyleSheet.absoluteFillObject,
-    justifyContent: 'flex-end',
-    alignItems: 'center',
-  },
-  scrollview: {
-    alignItems: 'center',
-    paddingVertical: 40,
-  },
-  button: {
-    flex: 1,
-    marginTop: 10,
-    backgroundColor: 'rgba(220,220,220,0.7)',
-    paddingHorizontal: 18,
-    paddingVertical: 12,
-    borderRadius: 20,
-  },
-  back: {
-    position: 'absolute',
-    top: 20,
-    left: 12,
-    backgroundColor: 'rgba(255,255,255,0.4)',
-    padding: 12,
-    borderRadius: 20,
-    width: 80,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
 
-export default App;
+ListPage.propTypes = {
+  listNbr: PropTypes.number,
+};
+
+ListPage.defaultProps = {
+  listNbr: 0,
+};
+
+export default ListPage;
