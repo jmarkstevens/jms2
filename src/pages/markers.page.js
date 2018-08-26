@@ -7,7 +7,7 @@ import {
 } from 'react-native';
 
 // tslint:disable-next-line:import-name
-import MapView, { Marker } from 'react-native-maps';
+import MapView, { Marker, ProviderPropType } from 'react-native-maps';
 
 import PriceMarker from '../markers/PriceMarker';
 import styles from './markers.style';
@@ -29,7 +29,7 @@ function getRandomArbitrary() {
   return Math.floor(Math.random() * (1500 - 500) + 500);
 }
 
-class DefaultMarkers extends React.Component {
+class PriceMarkers extends React.Component {
   constructor(props: any) {
     super(props);
 
@@ -61,9 +61,11 @@ class DefaultMarkers extends React.Component {
 
   render() {
     const { markers, region } = this.state;
+    const { provider } = this.props;
     return (
       <View style={styles.container}>
         <MapView
+          provider={provider}
           style={styles.map}
           initialRegion={region}
           onPress={e => this.onMapPress(e)}
@@ -91,4 +93,12 @@ class DefaultMarkers extends React.Component {
   }
 }
 
-export default DefaultMarkers;
+PriceMarkers.propTypes = {
+  provider: ProviderPropType,
+};
+
+PriceMarkers.defaultProps = {
+  provider: undefined,
+};
+
+export default PriceMarkers;
