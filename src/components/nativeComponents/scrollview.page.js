@@ -1,39 +1,44 @@
 import React from 'react';
-import {ScrollView, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 
 const NUM_ITEMS = 20;
 
 export default class ScrollViewPage extends React.Component {
-  static navigationOptions = {title: 'ScrollView'};
+  static navigationOptions = { title: 'ScrollView' };
+
   makeItems = (nItems: number, styles): Array<any> => {
-    var items = [];
-    for (var i = 0; i < nItems; i++) {
+    const items = [];
+    for (let i = 0; i < nItems; i++) {
       items[i] = (
         <TouchableOpacity key={i} style={styles}>
-          <Text>{'Item ' + i}</Text>
+          <Text>{`Item ${i}`}</Text>
         </TouchableOpacity>
       );
     }
     return items;
   };
+
   render() {
     const items = this.makeItems(NUM_ITEMS, styles.itemWrapper);
     items[4] = (
-      <ScrollView key={'scrollView'} horizontal>
-        {this.makeItems(NUM_ITEMS, [styles.itemWrapper, styles.horizontalItemWrapper])}
+      <ScrollView key="scrollView" horizontal>
+        {this.makeItems(NUM_ITEMS, [
+          styles.itemWrapper,
+          styles.horizontalItemWrapper,
+        ])}
       </ScrollView>
     );
 
-    let verticalScrollView = (
-      <ScrollView style={styles.verticalScrollView}>
-        {items}
-      </ScrollView>
+    const verticalScrollView = (
+      <ScrollView style={styles.verticalScrollView}>{items}</ScrollView>
     );
-    return (
-      <View style={styles.container}>
-        {verticalScrollView}
-      </View>
-    );
+    return <View style={styles.container}>{verticalScrollView}</View>;
   }
 }
 
@@ -42,19 +47,19 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
     flex: 1,
-    justifyContent: 'center'
+    justifyContent: 'center',
   },
   innerContainer: {
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
     flex: 1,
-    justifyContent: 'center'
+    justifyContent: 'center',
   },
   returnView: {
-    height: 35
+    height: 35,
   },
   verticalScrollView: {
-    margin: 10
+    margin: 10,
   },
   itemWrapper: {
     backgroundColor: '#dddddd',
@@ -63,9 +68,9 @@ const styles = StyleSheet.create({
     borderWidth: 5,
     borderColor: '#114e21',
     padding: 30,
-    margin: 5
+    margin: 5,
   },
   horizontalItemWrapper: {
-    padding: 50
-  }
+    padding: 50,
+  },
 });

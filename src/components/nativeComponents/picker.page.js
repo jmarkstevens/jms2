@@ -1,20 +1,23 @@
 import React from 'react';
-import {Picker, StyleSheet, View} from 'react-native';
+import { Picker, StyleSheet, View } from 'react-native';
 
 const Item = Picker.Item;
 
 class PickerPage extends React.Component {
-  static navigationOptions = {title: 'Picker'};
+  static navigationOptions = { title: 'Picker' };
+
   state = {
     selected1: 'key1',
     color: 'red',
-    mode: Picker.MODE_DIALOG
+    mode: Picker.MODE_DIALOG,
   };
+
   onValueChange = (key: string, value: string) => {
     const newState = {};
     newState[key] = value;
     this.setState(newState);
   };
+
   render() {
     return (
       <View style={styles.container}>
@@ -49,20 +52,20 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
     flex: 1,
-    justifyContent: 'center'
+    justifyContent: 'center',
   },
   innerContainer: {
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
     flex: 1,
-    justifyContent: 'center'
+    justifyContent: 'center',
   },
   returnView: {
-    height: 35
+    height: 35,
   },
   picker: {
-    width: 100
-  }
+    width: 100,
+  },
 });
 
 module.exports = PickerPage;

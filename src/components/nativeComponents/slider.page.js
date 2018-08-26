@@ -1,25 +1,28 @@
 import React from 'react';
-import {Slider, StyleSheet, Text, View} from 'react-native';
+import {
+  Slider, StyleSheet, Text, View,
+} from 'react-native';
 
 class SliderPage extends React.Component {
-  static navigationOptions = {title: 'Slider'};
+  static navigationOptions = { title: 'Slider' };
+
   state = {
     value1: 0,
     value2: 0,
     value3: 0,
-    value4: 0
+    value4: 0,
   };
+
   handleValueChange = (key: string, value: number) => {
     const newState = {};
     newState[key] = value;
     this.setState(newState);
   };
+
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.text}>
-          {this.state.value1}
-        </Text>
+        <Text style={styles.text}>{this.state.value1}</Text>
         <Slider
           value={0}
           minimumValue={0}
@@ -28,22 +31,18 @@ class SliderPage extends React.Component {
           step={1}
           style={styles.slider}
         />
-        <Text style={styles.text}>
-          {this.state.value2}
-        </Text>
+        <Text style={styles.text}>{this.state.value2}</Text>
         <Slider
           value={0}
           minimumValue={0}
           maximumValue={20}
-          minimumTrackTintColor={'red'}
-          maximumTrackTintColor={'green'}
+          minimumTrackTintColor="red"
+          maximumTrackTintColor="green"
           onValueChange={value => this.handleValueChange('value2', value)}
           step={1}
           style={styles.slider}
         />
-        <Text style={styles.text}>
-          {this.state.value3}
-        </Text>
+        <Text style={styles.text}>{this.state.value3}</Text>
         <Slider
           value={0}
           minimumValue={0}
@@ -54,9 +53,7 @@ class SliderPage extends React.Component {
           thumbImage={require('../../img/SLogoS4-24.png')}
           trackImage={require('../../img/slider.png')}
         />
-        <Text style={styles.text}>
-          {this.state.value4}
-        </Text>
+        <Text style={styles.text}>{this.state.value4}</Text>
         <Slider
           value={0}
           minimumValue={0}
@@ -77,28 +74,28 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
     flex: 1,
-    justifyContent: 'center'
+    justifyContent: 'center',
   },
   innerContainer: {
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
     flex: 1,
-    justifyContent: 'center'
+    justifyContent: 'center',
   },
   returnView: {
-    height: 35
+    height: 35,
   },
   slider: {
     height: 5,
     margin: 10,
-    width: 250
+    width: 250,
   },
   text: {
     fontSize: 14,
     textAlign: 'center',
     fontWeight: '500',
-    margin: 10
-  }
+    margin: 10,
+  },
 });
 
 module.exports = SliderPage;

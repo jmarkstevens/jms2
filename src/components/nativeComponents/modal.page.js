@@ -1,17 +1,26 @@
 import React from 'react';
-import {Modal, StyleSheet, Text, TouchableHighlight, View} from 'react-native';
+import {
+  Modal,
+  StyleSheet,
+  Text,
+  TouchableHighlight,
+  View,
+} from 'react-native';
 
 class ModalPage extends React.Component {
-  static navigationOptions = {title: 'Modal'};
-  state = {modalVisible: false};
+  static navigationOptions = { title: 'Modal' };
+
+  state = { modalVisible: false };
+
   setModalVisible = () => {
-    this.setState({modalVisible: !this.state.modalVisible});
+    this.setState({ modalVisible: !this.state.modalVisible });
   };
+
   render() {
     return (
       <View style={styles.container}>
         <Modal
-          animationType={'slide'}
+          animationType="slide"
           transparent={false}
           visible={this.state.modalVisible}
           onRequestClose={() => {
@@ -40,17 +49,17 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
     flex: 1,
-    justifyContent: 'center'
+    justifyContent: 'center',
   },
   innerContainer: {
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
     flex: 1,
-    justifyContent: 'center'
+    justifyContent: 'center',
   },
   returnView: {
-    height: 35
-  }
+    height: 35,
+  },
 });
 
 module.exports = ModalPage;

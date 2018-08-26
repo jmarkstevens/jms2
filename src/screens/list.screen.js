@@ -11,41 +11,40 @@ import {
 } from 'react-native';
 import { PROVIDER_GOOGLE, PROVIDER_DEFAULT } from 'react-native-maps';
 
-import styles from './list.style';
-import DisplayLatLng from './examples/DisplayLatLng';
-import ViewsAsMarkers from './examples/ViewsAsMarkers';
-import EventListener from './examples/EventListener';
-import MarkerTypes from './examples/MarkerTypes';
-import DraggableMarkers from './examples/DraggableMarkers';
-import PolygonCreator from './examples/PolygonCreator';
-import PolylineCreator from './examples/PolylineCreator';
-import GradientPolylines from './examples/GradientPolylines';
-import AnimatedViews from './examples/AnimatedViews';
-import AnimatedMarkers from './examples/AnimatedMarkers';
-import Callouts from './examples/Callouts';
-import Overlays from './examples/Overlays';
-import DefaultMarkers from './examples/DefaultMarkers';
-import CustomMarkers from './examples/CustomMarkers';
-import CachedMap from './examples/CachedMap';
-import LoadingMap from './examples/LoadingMap';
-import TakeSnapshot from './examples/TakeSnapshot';
-import FitToSuppliedMarkers from './examples/FitToSuppliedMarkers';
-import FitToCoordinates from './examples/FitToCoordinates';
-import LiteMapView from './examples/LiteMapView';
-import CustomTiles from './examples/CustomTiles';
-import ZIndexMarkers from './examples/ZIndexMarkers';
-import StaticMap from './examples/StaticMap';
-import MapStyle from './examples/MapStyle';
-import LegalLabel from './examples/LegalLabel';
-import SetNativePropsOverlays from './examples/SetNativePropsOverlays';
-import CustomOverlay from './examples/CustomOverlay';
-import MapKml from './examples/MapKml';
-import BugMarkerWontUpdate from './examples/BugMarkerWontUpdate';
-import ImageOverlayWithAssets from './examples/ImageOverlayWithAssets';
-import ImageOverlayWithURL from './examples/ImageOverlayWithURL';
-import AnimatedNavigation from './examples/AnimatedNavigation';
-import OnPoiClick from './examples/OnPoiClick';
-import PriceMarkers from './pages/markers.page';
+import DisplayLatLng from '../examples/DisplayLatLng';
+import ViewsAsMarkers from '../examples/ViewsAsMarkers';
+import EventListener from '../examples/EventListener';
+import MarkerTypes from '../examples/MarkerTypes';
+import DraggableMarkers from '../examples/DraggableMarkers';
+import PolygonCreator from '../examples/PolygonCreator';
+import PolylineCreator from '../examples/PolylineCreator';
+import GradientPolylines from '../examples/GradientPolylines';
+import AnimatedViews from '../examples/AnimatedViews';
+import AnimatedMarkers from '../examples/AnimatedMarkers';
+import Callouts from '../examples/Callouts';
+import Overlays from '../examples/Overlays';
+import DefaultMarkers from '../examples/DefaultMarkers';
+import CustomMarkers from '../examples/CustomMarkers';
+import CachedMap from '../examples/CachedMap';
+import LoadingMap from '../examples/LoadingMap';
+import TakeSnapshot from '../examples/TakeSnapshot';
+import FitToSuppliedMarkers from '../examples/FitToSuppliedMarkers';
+import FitToCoordinates from '../examples/FitToCoordinates';
+import LiteMapView from '../examples/LiteMapView';
+import CustomTiles from '../examples/CustomTiles';
+import ZIndexMarkers from '../examples/ZIndexMarkers';
+import StaticMap from '../examples/StaticMap';
+import MapStyle from '../examples/MapStyle';
+import LegalLabel from '../examples/LegalLabel';
+import SetNativePropsOverlays from '../examples/SetNativePropsOverlays';
+import CustomOverlay from '../examples/CustomOverlay';
+import MapKml from '../examples/MapKml';
+import BugMarkerWontUpdate from '../examples/BugMarkerWontUpdate';
+import ImageOverlayWithAssets from '../examples/ImageOverlayWithAssets';
+import ImageOverlayWithURL from '../examples/ImageOverlayWithURL';
+import AnimatedNavigation from '../examples/AnimatedNavigation';
+import OnPoiClick from '../examples/OnPoiClick';
+import PriceMarkers from '../pages/markers.page';
 
 const IOS = Platform.OS === 'ios';
 const ANDROID = Platform.OS === 'android';
@@ -115,7 +114,7 @@ function makeExampleMapper(useGoogleMaps) {
   return example => example;
 }
 
-class ListPage extends React.Component {
+class ListScreen extends React.Component {
   constructor(props) {
     super(props);
 
@@ -199,13 +198,43 @@ class ListPage extends React.Component {
   }
 }
 
-
-ListPage.propTypes = {
+ListScreen.propTypes = {
   listNbr: PropTypes.number,
 };
 
-ListPage.defaultProps = {
+ListScreen.defaultProps = {
   listNbr: 0,
 };
 
-export default ListPage;
+const styles = StyleSheet.create({
+  container: {
+    ...StyleSheet.absoluteFillObject,
+    justifyContent: 'flex-end',
+    alignItems: 'center',
+  },
+  scrollview: {
+    alignItems: 'center',
+    paddingVertical: 40,
+  },
+  button: {
+    flex: 1,
+    marginTop: 10,
+    backgroundColor: 'rgba(220,220,220,0.7)',
+    paddingHorizontal: 18,
+    paddingVertical: 12,
+    borderRadius: 20,
+  },
+  back: {
+    position: 'absolute',
+    top: 20,
+    left: 12,
+    backgroundColor: 'rgba(255,255,255,0.4)',
+    padding: 12,
+    borderRadius: 20,
+    width: 80,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+});
+
+export default ListScreen;
