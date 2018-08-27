@@ -1,16 +1,16 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { ScrollView, StyleSheet, View } from 'react-native';
 import PropTypes from 'prop-types';
 import { graphql } from 'react-apollo';
 import gql from 'graphql-tag';
 
+import WithState from '../components/graphql/withState';
 import WithApollo from '../components/graphql/withApollo';
+import WithGraphql from '../components/graphql/withGraphql';
+import WithQuery from '../components/graphql/withQuery';
+import WithStaticCache from '../components/graphql/withStaticCache';
 
 // import WithLink from '../components/graphql/withLink';
-// import WithGraphql from '../components/graphql/withGraphql';
-// import WithQuery from '../components/graphql/withQuery';
-// import WithState from '../components/graphql/withState';
-// import WithStaticCache from '../components/graphql/withStaticCache';
 
 const upvoteMutation = gql`
   mutation upvotePost($postId: Int!, $inVote: Int) {
@@ -31,13 +31,14 @@ class GraphqlScreen extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text>Graphql screen</Text>
-        <WithApollo />
-        {/* <WithState />
-        <WithGraphql />
-        <WithQuery />
-        <WithStaticCache />
-        <WithLink /> */}
+        <ScrollView style={styles.verticalScrollView}>
+          <WithState />
+          <WithApollo />
+          <WithGraphql />
+          <WithQuery />
+          <WithStaticCache />
+          {/* <WithLink /> */}
+        </ScrollView>
       </View>
     );
   }
@@ -54,17 +55,10 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
   },
-  innerContainer: {
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-    flex: 1,
-    justifyContent: 'center',
-  },
-  returnView: {
-    height: 35,
-  },
-  picker: {
-    width: 100,
+  verticalScrollView: {
+    margin: 10,
+    paddingHorizontal: 18,
+    paddingVertical: 12,
   },
 });
 

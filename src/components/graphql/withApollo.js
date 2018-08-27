@@ -97,7 +97,7 @@ class WithApollo extends Component {
     });
     return (
       <View style={styles.container}>
-        <Text>With Apollo</Text>
+        <Text style={styles.firstLine}>With Apollo</Text>
         {/* <button onClick={() => this.getPosts()}> Update</button> */}
         <View>{list}</View>
       </View>
@@ -119,11 +119,9 @@ const styles = StyleSheet.create({
   ul: {
     flexDirection: 'row',
   },
-  returnView: {
-    height: 35,
-  },
-  picker: {
-    width: 100,
+  firstLine: {
+    fontWeight: '700',
+    paddingVertical: 10,
   },
 });
 

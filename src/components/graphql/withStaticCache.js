@@ -1,96 +1,130 @@
 import React, { Component } from 'react';
-import ApolloClient from "apollo-client";
-// import { ApolloLink } from "apollo-link";
-import { HttpLink } from "apollo-link-http";
+import {
+  StyleSheet, Text, TouchableOpacity, View,
+} from 'react-native';
+import ApolloClient from 'apollo-client';
+import { HttpLink } from 'apollo-link-http';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
-import Cache from "../qraphql/cache";
-import { postsQuery, upvoteMutation, upvotedMutation } from "../qraphql/gql";
+import Cache from '../../qraphql/cache';
+import { postsQuery, upvoteMutation, upvotedMutation } from '../../qraphql/gql';
 
-const uri = "http://localhost:3000/graphql";
+const uri = 'http://localhost:3000/graphql';
 // const graphqlLink = createHttpLink({ uri });
 
+// eslint-disable-next-line
 const cache = new Cache().cache;
 
 const client = new ApolloClient({
   cache,
-  link: new HttpLink({ uri })
+  link: new HttpLink({ uri }),
 });
 
 export default class WithStaticCache extends Component {
-  state = { update: { id: 0, title: "", votes: 0 }, posts: [] };
+  state = { posts: [] };
+
   componentDidMount() {
     this.getPosts();
   }
-  doUpvoted = upvotedPost => {
+
+  doUpvoted = (upvotedPost) => {
     client
       .mutate({
         mutation: upvotedMutation,
-        variables: { ...upvotedPost }
+        variables: { ...upvotedPost },
       })
       .then(() => {
         // console.log("upvotedPost then");
       })
-      .catch(err => {
-        console.log("catch", err);
+      .catch((err) => {
+        console.log('catch', err);
       });
   };
-  onMutate = post => {
+
+  onMutate = (post) => {
     const newVote = post.votes + 1;
     client
       .mutate({
         mutation: upvoteMutation,
         variables: {
           postId: post.id,
-          inVote: newVote
-        }
+          inVote: newVote,
+        },
       })
-      .then(data => {
+      .then((data) => {
         const { upvotePost } = data.data;
         this.doUpvoted(upvotePost);
         this.getPosts();
       })
-      .catch(err => {
-        console.log("catch", err);
+      .catch((err) => {
+        console.log('catch', err);
       });
   };
+
   getPosts = () => {
     const observableQuery = client.watchQuery({
       query: postsQuery,
-      pollInterval: 15000
+      pollInterval: 15000,
     });
     observableQuery.subscribe({
-      next: ({ data }) => this.setState({ posts: data.posts })
+      next: ({ data }) => this.setState({ posts: data.posts }),
     });
   };
+
   getPosts0 = () => {
     client
       .query({
-        query: postsQuery
+        query: postsQuery,
       })
-      .then(data => {
+      .then((data) => {
         const { posts } = data.data;
         this.setState({ posts });
       })
-      .catch(err => {
-        console.log("catch", err);
+      .catch((err) => {
+        console.log('catch', err);
       });
   };
+
   render() {
-    console.log("WithApollo props:", this.props);
-    const list = this.state.posts.map((post, index) => {
+    console.log('WithApollo props:', this.props);
+    const { posts } = this.state;
+    const iconName = 'vote-outline';
+    const tintColor = 'purple';
+    const list = posts.map((post, index) => {
       const key = index + 1;
       return (
-        <li key={key}>
-          <button onClick={() => this.onMutate(post)}> up vote</button>&nbsp;
-          {post.title} {post.author.lastName} with {post.votes} votes.
-        </li>
+        <View key={key} style={styles.ul}>
+          <TouchableOpacity onPress={() => this.onMutate(post)}>
+            <MaterialCommunityIcons name={iconName} size={25} color={tintColor} />
+          </TouchableOpacity>
+          <Text>
+            {post.title} {post.author.lastName} with {post.votes} votes.
+          </Text>
+        </View>
       );
     });
     return (
-      <div style={{ marginLeft: "20px", textAlign: "left" }}>
-        <h2>WithStaticCache</h2>
-        <ul>{list}</ul>
-      </div>
+      <View style={styles.container}>
+        <Text style={styles.firstLine}>With StaticCache</Text>
+        {/* <button onClick={() => this.getPosts()}> Update</button> */}
+        <View>{list}</View>
+      </View>
     );
   }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    alignItems: 'flex-start',
+    backgroundColor: '#F5FCFF',
+    flex: 1,
+    justifyContent: 'center',
+  },
+  ul: {
+    flexDirection: 'row',
+  },
+  firstLine: {
+    fontWeight: '700',
+    paddingVertical: 10,
+  },
+});
