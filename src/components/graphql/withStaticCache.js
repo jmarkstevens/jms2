@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {
-  StyleSheet, Text, TouchableOpacity, View,
+  Platform, StyleSheet, Text, TouchableOpacity, View,
 } from 'react-native';
 import ApolloClient from 'apollo-client';
 import { HttpLink } from 'apollo-link-http';
@@ -9,8 +9,8 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import Cache from '../../qraphql/cache';
 import { postsQuery, upvoteMutation, upvotedMutation } from '../../qraphql/gql';
 
-const uri = 'http://localhost:3000/graphql';
-// const graphqlLink = createHttpLink({ uri });
+const ip = Platform.OS === 'ios' ? 'localhost' : '10.0.2.2';
+const uri = `http://${ip}:3000/graphql`;
 
 // eslint-disable-next-line
 const cache = new Cache().cache;

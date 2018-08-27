@@ -1,4 +1,5 @@
 import React from 'react';
+import { Platform } from 'react-native';
 import ApolloClient from 'apollo-client';
 import { ApolloProvider } from 'react-apollo';
 
@@ -12,7 +13,6 @@ import { defaults, resolvers, typeDefs } from './qraphql/resolvers';
 
 // eslint-disable-next-line
 const cache = new Cache().cache;
-// const cache = Cache.cache;
 
 const stateLink = withClientState({
   cache,
@@ -21,7 +21,8 @@ const stateLink = withClientState({
   typeDefs,
 });
 
-const uri = 'http://localhost:3000/graphql';
+const ip = Platform.OS === 'ios' ? 'localhost' : '10.0.2.2';
+const uri = `http://${ip}:3000/graphql`;
 const graphqlLink = createHttpLink({ uri });
 
 const client = new ApolloClient({
