@@ -8,15 +8,14 @@ import NativeComponents from '../screens/native.components.screen';
 import GraphqlScreen from '../screens/graphql.screen';
 
 const listOne = () => <ListPage listNbr={0} />;
-
 const listAll = () => <ListPage listNbr={1} />;
 
 export default createBottomTabNavigator(
   {
-    Map: listOne,
-    All: listAll,
     Native: NativeComponents,
     Graphql: GraphqlScreen,
+    Map: listOne,
+    All: listAll,
   },
   {
     navigationOptions: ({ navigation }) => ({

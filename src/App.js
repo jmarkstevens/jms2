@@ -7,6 +7,8 @@ import { withClientState } from 'apollo-link-state';
 import { createHttpLink } from 'apollo-link-http';
 import { ApolloLink } from 'apollo-link';
 
+// import firebase from 'react-native-firebase'; // eslint-disable-line
+
 import Navigator from './navigation/navigator';
 import Cache from './qraphql/cache';
 import { defaults, resolvers, typeDefs } from './qraphql/resolvers';

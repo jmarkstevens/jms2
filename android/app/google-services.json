@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "536315649108",
+    "firebase_url": "https://jms2-prototype.firebaseio.com",
+    "project_id": "jms2-prototype",
+    "storage_bucket": "jms2-prototype.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:536315649108:android:21fbce8c96363aa6",
+        "android_client_info": {
+          "package_name": "com.jmarkstevens.jms2"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "536315649108-4oervkq7uj86i96ce2hf4rpfdrf6sik3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCp78UinWzkFTmvVB2poRugPhOkN1jaCso"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
