@@ -1,7 +1,5 @@
 import React from 'react';
-import {
-  Alert, Button, StyleSheet, View,
-} from 'react-native';
+import { Alert, Button, StyleSheet, View } from 'react-native';
 
 function onButtonPress(id) {
   Alert.alert('Alert', `You clicked the ${id.target} button`);
