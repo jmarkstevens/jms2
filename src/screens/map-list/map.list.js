@@ -11,40 +11,42 @@ import {
 } from 'react-native';
 import { PROVIDER_GOOGLE, PROVIDER_DEFAULT } from 'react-native-maps';
 
-import DisplayLatLng from '../examples/DisplayLatLng';
-import ViewsAsMarkers from '../examples/ViewsAsMarkers';
-import EventListener from '../examples/EventListener';
-import MarkerTypes from '../examples/MarkerTypes';
-import DraggableMarkers from '../examples/DraggableMarkers';
-import PolygonCreator from '../examples/PolygonCreator';
-import PolylineCreator from '../examples/PolylineCreator';
-import GradientPolylines from '../examples/GradientPolylines';
-import AnimatedViews from '../examples/AnimatedViews';
-import AnimatedMarkers from '../examples/AnimatedMarkers';
-import Callouts from '../examples/Callouts';
-import Overlays from '../examples/Overlays';
-import DefaultMarkers from '../examples/DefaultMarkers';
-import CustomMarkers from '../examples/CustomMarkers';
-import CachedMap from '../examples/CachedMap';
-import LoadingMap from '../examples/LoadingMap';
-import TakeSnapshot from '../examples/TakeSnapshot';
-import FitToSuppliedMarkers from '../examples/FitToSuppliedMarkers';
-import FitToCoordinates from '../examples/FitToCoordinates';
-import LiteMapView from '../examples/LiteMapView';
-import CustomTiles from '../examples/CustomTiles';
-import ZIndexMarkers from '../examples/ZIndexMarkers';
-import StaticMap from '../examples/StaticMap';
-import MapStyle from '../examples/MapStyle';
-import LegalLabel from '../examples/LegalLabel';
-import SetNativePropsOverlays from '../examples/SetNativePropsOverlays';
-import CustomOverlay from '../examples/CustomOverlay';
-import MapKml from '../examples/MapKml';
-import BugMarkerWontUpdate from '../examples/BugMarkerWontUpdate';
-import ImageOverlayWithAssets from '../examples/ImageOverlayWithAssets';
-import ImageOverlayWithURL from '../examples/ImageOverlayWithURL';
-import AnimatedNavigation from '../examples/AnimatedNavigation';
-import OnPoiClick from '../examples/OnPoiClick';
-import PriceMarkers from '../pages/markers.page';
+import DisplayLatLng from '../../components/map-examples/DisplayLatLng';
+import ViewsAsMarkers from '../../components/map-examples/ViewsAsMarkers';
+import EventListener from '../../components/map-examples/EventListener';
+import MarkerTypes from '../../components/map-examples/MarkerTypes';
+import DraggableMarkers from '../../components/map-examples/DraggableMarkers';
+import PolygonCreator from '../../components/map-examples/PolygonCreator';
+import PolylineCreator from '../../components/map-examples/PolylineCreator';
+import GradientPolylines from '../../components/map-examples/GradientPolylines';
+import AnimatedViews from '../../components/map-examples/AnimatedViews';
+import AnimatedMarkers from '../../components/map-examples/AnimatedMarkers';
+import Callouts from '../../components/map-examples/Callouts';
+import Overlays from '../../components/map-examples/Overlays';
+import DefaultMarkers from '../../components/map-examples/DefaultMarkers';
+import CustomMarkers from '../../components/map-examples/CustomMarkers';
+import CachedMap from '../../components/map-examples/CachedMap';
+import LoadingMap from '../../components/map-examples/LoadingMap';
+import TakeSnapshot from '../../components/map-examples/TakeSnapshot';
+import FitToSuppliedMarkers from '../../components/map-examples/FitToSuppliedMarkers';
+import FitToCoordinates from '../../components/map-examples/FitToCoordinates';
+import LiteMapView from '../../components/map-examples/LiteMapView';
+import CustomTiles from '../../components/map-examples/CustomTiles';
+import ZIndexMarkers from '../../components/map-examples/ZIndexMarkers';
+import StaticMap from '../../components/map-examples/StaticMap';
+import MapStyle from '../../components/map-examples/MapStyle';
+import LegalLabel from '../../components/map-examples/LegalLabel';
+import SetNativePropsOverlays from '../../components/map-examples/SetNativePropsOverlays';
+import CustomOverlay from '../../components/map-examples/CustomOverlay';
+import MapKml from '../../components/map-examples/MapKml';
+import BugMarkerWontUpdate from '../../components/map-examples/BugMarkerWontUpdate';
+import ImageOverlayWithAssets from '../../components/map-examples/ImageOverlayWithAssets';
+import ImageOverlayWithURL from '../../components/map-examples/ImageOverlayWithURL';
+import AnimatedNavigation from '../../components/map-examples/AnimatedNavigation';
+import OnPoiClick from '../../components/map-examples/OnPoiClick';
+import PriceMarkers from '../../components/map-examples/markers-page/markers.page';
+
+import styles from './map.list.styles';
 
 const IOS = Platform.OS === 'ios';
 const ANDROID = Platform.OS === 'android';
@@ -205,36 +207,5 @@ ListScreen.propTypes = {
 ListScreen.defaultProps = {
   listNbr: 0,
 };
-
-const styles = StyleSheet.create({
-  container: {
-    ...StyleSheet.absoluteFillObject,
-    justifyContent: 'flex-end',
-    alignItems: 'center',
-  },
-  scrollview: {
-    alignItems: 'center',
-    paddingVertical: 40,
-  },
-  button: {
-    flex: 1,
-    marginTop: 10,
-    backgroundColor: 'rgba(220,220,220,0.7)',
-    paddingHorizontal: 18,
-    paddingVertical: 12,
-    borderRadius: 20,
-  },
-  back: {
-    position: 'absolute',
-    top: 20,
-    left: 12,
-    backgroundColor: 'rgba(255,255,255,0.4)',
-    padding: 12,
-    borderRadius: 20,
-    width: 80,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
 
 export default ListScreen;

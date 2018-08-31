@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import {
-  StyleSheet, Text, TouchableOpacity, View,
-} from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { withApollo } from 'react-apollo';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
@@ -15,7 +13,7 @@ class WithApollo extends Component {
     this.getPosts();
   }
 
-  doUpvoted = (upvotedPost) => {
+  doUpvoted = upvotedPost => {
     const { client } = this.props;
     client
       .mutate({
@@ -25,12 +23,12 @@ class WithApollo extends Component {
       .then(() => {
         // console.log("upvotedPost then");
       })
-      .catch((err) => {
+      .catch(err => {
         console.log('catch', err);
       });
   };
 
-  onMutate = (post) => {
+  onMutate = post => {
     const { client } = this.props;
     const newVote = post.votes + 1;
     client
@@ -41,12 +39,12 @@ class WithApollo extends Component {
           inVote: newVote,
         },
       })
-      .then((data) => {
+      .then(data => {
         const { upvotePost } = data.data;
         this.doUpvoted(upvotePost);
         this.getPosts();
       })
-      .catch((err) => {
+      .catch(err => {
         console.log('catch', err);
       });
   };
@@ -68,11 +66,11 @@ class WithApollo extends Component {
       .query({
         query: postsQuery,
       })
-      .then((data) => {
+      .then(data => {
         const { posts } = data.data;
         this.setState({ posts });
       })
-      .catch((err) => {
+      .catch(err => {
         console.log('catch', err);
       });
   };
@@ -87,7 +85,11 @@ class WithApollo extends Component {
       return (
         <View key={key} style={styles.ul}>
           <TouchableOpacity onPress={() => this.onMutate(post)}>
-            <MaterialCommunityIcons name={iconName} size={25} color={tintColor} />
+            <MaterialCommunityIcons
+              name={iconName}
+              size={25}
+              color={tintColor}
+            />
           </TouchableOpacity>
           <Text>
             {post.title} {post.author.lastName} with {post.votes} votes.

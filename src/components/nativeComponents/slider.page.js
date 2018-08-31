@@ -1,7 +1,5 @@
 import React from 'react';
-import {
-  Slider, StyleSheet, Text, View,
-} from 'react-native';
+import { Slider, StyleSheet, Text, View } from 'react-native';
 
 class SliderPage extends React.Component {
   static navigationOptions = { title: 'Slider' };

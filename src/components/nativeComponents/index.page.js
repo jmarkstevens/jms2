@@ -1,7 +1,5 @@
 import React from 'react';
-import {
-  StyleSheet, Text, TouchableOpacity, View,
-} from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
 const menuList = [
   { key: 'ac', text: 'ActivityIndicator' },

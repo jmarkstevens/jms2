@@ -3,12 +3,12 @@ import React from 'react';
 import { createBottomTabNavigator } from 'react-navigation';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
-import ListPage from '../screens/list.screen';
-import NativeComponents from '../screens/native.components.screen';
-import GraphqlScreen from '../screens/graphql.screen';
+import MapList from './map-list/map.list';
+import NativeComponents from './native-components/native.components';
+import GraphqlScreen from './graphql/graphql';
 
-const listOne = () => <ListPage listNbr={0} />;
-const listAll = () => <ListPage listNbr={1} />;
+const listOne = () => <MapList listNbr={0} />;
+const listAll = () => <MapList listNbr={1} />;
 
 export default createBottomTabNavigator(
   {
@@ -34,7 +34,9 @@ export default createBottomTabNavigator(
 
         // You can return any component that you like here! We usually use an
         // icon component from react-native-vector-icons
-        return <MaterialCommunityIcons name={iconName} size={25} color={tintColor} />;
+        return (
+          <MaterialCommunityIcons name={iconName} size={25} color={tintColor} />
+        );
       },
     }),
     tabBarOptions: {

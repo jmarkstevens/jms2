@@ -14,7 +14,7 @@ export default class ScrollViewPage extends React.Component {
 
   makeItems = (nItems: number, styles): Array<any> => {
     const items = [];
-    for (let i = 0; i < nItems; i++) {
+    for (let i = 0; i < nItems; i += 1) {
       items[i] = (
         <TouchableOpacity key={i} style={styles}>
           <Text>{`Item ${i}`}</Text>

@@ -1,18 +1,24 @@
 export const resolvers = {
   Mutation: {
     setUpvotedPost: (_, upvotedPost, { cache, getCacheKey }) => {
-      const id = getCacheKey({ __typename: "Post", id: 0 });
+      const id = getCacheKey({ __typename: 'Post', id: 0 });
       // console.log("resolvers upvotedPost id:", id);
       // console.log("resolvers upvotedPost upvotedPost:", upvotedPost);
       const data = { ...upvotedPost };
       cache.writeData({ id, data });
       return null;
-    }
-  }
+    },
+  },
 };
 
 export const defaults = {
-  upvotedPost: { id: 0, title: "query", votes: 0, author: { lastName: "default", __typename: "Author" }, __typename: "Post" }
+  upvotedPost: {
+    id: 0,
+    title: 'query',
+    votes: 0,
+    author: { lastName: 'default', __typename: 'Author' },
+    __typename: 'Post',
+  },
 };
 
 export const typeDefs = `

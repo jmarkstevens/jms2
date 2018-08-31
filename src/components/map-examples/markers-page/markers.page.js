@@ -1,10 +1,5 @@
 import * as React from 'react';
-import {
-  Dimensions,
-  Text,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import { Dimensions, Text, TouchableOpacity, View } from 'react-native';
 
 // tslint:disable-next-line:import-name
 import MapView, { Marker, ProviderPropType } from 'react-native-maps';
@@ -51,7 +46,7 @@ class PriceMarkers extends React.Component {
         ...markers,
         {
           coordinate: e.nativeEvent.coordinate,
-          key: id += 1,
+          key: (id += 1),
           color: randomColor(),
           amount: getRandomArbitrary(),
         },
