@@ -9,6 +9,7 @@ import WithApollo from '../../components/graphql/withApollo';
 import WithGraphql from '../../components/graphql/withGraphql';
 import WithQuery from '../../components/graphql/withQuery';
 import WithStaticCache from '../../components/graphql/withStaticCache';
+import { testProperties } from '../../config/TestProperties';
 
 import styles from './graphql.styles';
 
@@ -32,7 +33,7 @@ class GraphqlScreen extends Component {
 
   render() {
     return (
-      <View style={styles.container}>
+      <View style={styles.container} {...testProperties('Graphql')}>
         <ScrollView style={styles.verticalScrollView}>
           <WithState />
           <WithApollo />

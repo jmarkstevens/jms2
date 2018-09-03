@@ -6,20 +6,25 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import MapList from './map-list/map.list';
 import NativeComponents from './native-components/native.components';
 import GraphqlScreen from './graphql/graphql';
+import { testProperties } from '../config/TestProperties';
 
 const listOne = () => <MapList listNbr={0} />;
 const listAll = () => <MapList listNbr={1} />;
 
 export default createBottomTabNavigator(
   {
+    Maps: listOne,
+    All: listAll,
     Native: NativeComponents,
     Graphql: GraphqlScreen,
-    Map: listOne,
-    All: listAll,
   },
   {
     navigationOptions: ({ navigation }) => ({
-      tabBarIcon: ({ focused, tintColor }) => { // eslint-disable-line
+      tabBarTestIDProps: {
+        ...testProperties(navigation.state.routeName),
+      },
+      tabBarIcon: ({ focused, tintColor }) => {
+        // eslint-disable-line
         const { routeName } = navigation.state;
         let iconName;
         if (routeName === 'Map') {
@@ -35,7 +40,12 @@ export default createBottomTabNavigator(
         // You can return any component that you like here! We usually use an
         // icon component from react-native-vector-icons
         return (
-          <MaterialCommunityIcons name={iconName} size={25} color={tintColor} />
+          <MaterialCommunityIcons
+            name={iconName}
+            size={25}
+            color={tintColor}
+            {...testProperties(routeName)}
+          />
         );
       },
     }),

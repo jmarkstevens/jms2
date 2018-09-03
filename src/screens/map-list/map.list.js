@@ -45,6 +45,7 @@ import ImageOverlayWithURL from '../../components/map-examples/ImageOverlayWithU
 import AnimatedNavigation from '../../components/map-examples/AnimatedNavigation';
 import OnPoiClick from '../../components/map-examples/OnPoiClick';
 import PriceMarkers from '../../components/map-examples/markers-page/markers.page';
+import { testProperties } from '../../config/TestProperties';
 
 import styles from './map.list.styles';
 
@@ -166,7 +167,7 @@ class ListScreen extends React.Component {
   renderExamples(examples) {
     const { Component, useGoogleMaps } = this.state;
     return (
-      <View style={styles.container}>
+      <View style={styles.container} {...testProperties('Maps')}>
         {Component && (
           <Component
             provider={useGoogleMaps ? PROVIDER_GOOGLE : PROVIDER_DEFAULT}

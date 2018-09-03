@@ -7,6 +7,8 @@
     "ios": "react-native run-ios",
     "android": "react-native run-android",
     "test": "jest",
+    "appium.android": "node_modules/.bin/wdio __tests__/appium/config/wdio.android.conf.js",
+    "appium.ios": "node_modules/.bin/wdio __tests__/appium/config/wdio.ios.conf.js",
     "test1": "wdio e2e/mocha.ios.js",
     "test2": "wdio e2e/debug.android.js"
   },
@@ -17,6 +19,7 @@
     "apollo-link-error": "^1.1.0",
     "apollo-link-http": "^1.5.4",
     "apollo-link-state": "^0.4.1",
+    "chai": "^4.1.2",
     "fbjs": "^0.8.17",
     "graphql": "^0.13.2",
     "graphql-tag": "^2.9.2",
@@ -25,19 +28,23 @@
     "react": "16.4.1",
     "react-apollo": "^2.1.11",
     "react-native": "0.56.0",
+    "react-native-config": "^0.11.5",
     "react-native-firebase": "^4.3.8",
     "react-native-maps": "^0.21.0",
     "react-native-vector-icons": "^5.0.0",
-    "react-navigation": "^2.12.1"
+    "react-navigation": "^2.12.1",
+    "wdio-cucumber-framework": "^2.2.7"
   },
   "devDependencies": {
-    "@babel/core": "7.0.0-rc.2",
-    "babel-core": "7.0.0-bridge.0",
+    "@babel/core": "^7.0.0-beta.51",
+    "babel-core": "^7.0.0-beta.51",
     "babel-eslint": "^8.2.6",
-    "babel-jest": "23.4.2",
-    "babel-preset-flow": "^6.23.0",
-    "babel-preset-react-native": "^5.0.1",
+    "babel-jest": "^23.4.2",
+    "babel-preset-react-native": "4.0.0",
     "babel-preset-react-native-stage-0": "1.0.1",
+    "babel-register": "^6.26.0",
+    "babel-runtime": "^7.0.0-beta",
+    "cucumber": "^4.2.1",
     "eslint": "^5.3.0",
     "eslint-config-airbnb": "17.1.0",
     "eslint-config-prettier": "^3.0.1",
@@ -45,14 +52,23 @@
     "eslint-plugin-jsx-a11y": "^6.1.1",
     "eslint-plugin-prettier": "^2.6.2",
     "eslint-plugin-react": "^7.11.0",
-    "flow-bin": "^0.79.1",
+    "fs-extra": "^7.0.0",
     "jest": "23.5.0",
+    "multiple-cucumber-html-reporter": "^1.11.2",
     "prettier": "^1.14.2",
     "react-test-renderer": "16.4.1",
+    "stubs": "^3.0.0",
     "wdio-mocha-framework": "^0.6.3",
-    "webdriverio": "^4.13.2"
+    "wdio-spec-reporter": "^0.1.5",
+    "webdriverio": "^4.13.2",
+    "yargs": "^12.0.1"
   },
   "jest": {
     "preset": "react-native"
+  },
+  "rnpm": {
+    "assets": [
+      "./src/assets/fonts/MaterialCommunityIcons/"
+    ]
   }
 }

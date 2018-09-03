@@ -4,6 +4,12 @@
     "airbnb",
     "prettier"
   ],
+  "globals": {
+    "$": true,
+    "browser": true,
+    "device": true,
+    "expect": true
+  },
   "plugins": [
     "react",
     "jsx-a11y",
