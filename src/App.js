@@ -9,7 +9,7 @@ import { ApolloLink } from 'apollo-link';
 
 // import firebase from 'react-native-firebase'; // eslint-disable-line
 
-import Navigator from './navigation/navigator';
+import Navigator from './screens/navigator';
 import Cache from './qraphql/cache';
 import { defaults, resolvers, typeDefs } from './qraphql/resolvers';
 
