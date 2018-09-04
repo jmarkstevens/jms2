@@ -1,7 +1,7 @@
 const { config } = require('./wdio.shared.conf');
 
 const ANDROID_APP_PATH =
-  '/Users/jmarkstevens/Kykas/Active/rn/jms2/android/app/build/outputs/apk/app-debug.apk';
+  '/Users/jmarkstevens/Kykas/Active/rn/jms2/android/app/build/outputs/apk/debug/app-debug.apk';
 const deviceName = 'Android Emulator';
 const platformName = 'Android';
 // const platformVersion = '7.1.1';

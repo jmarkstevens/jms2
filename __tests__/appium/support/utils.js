@@ -1,6 +1,7 @@
+/* eslint-disable */
 // import { ensureDirSync } from 'fs-extra';
 // import { resolve } from 'path';
-import {
+const {
   ANDROID_ACCEPT_ALERT_SELECTOR,
   ANDROID_ALERT_MESSAGE_SELECTOR,
   ANDROID_ALERT_TITLE_SELECTOR,
@@ -8,13 +9,13 @@ import {
   IOS_ALERT_SELECTOR,
   IOS_TEXT_SELECTOR,
   SWIPE_DIRECTION,
-} from './constants';
+} = require('./constants');
 
 /**
  * The app is opened by Appium by default, when we start a new scenario
  * the app needs to be restarted
  */
-export function launchApp() {
+module.exports.launchApp = function () {
   if (!device.options.firstAppStart) {
     restartApp();
   }
@@ -24,7 +25,7 @@ export function launchApp() {
 /**
  * Restart the app, restarting is done with a reset of the app status to start with a clean phase
  */
-export function restartApp() {
+module.exports.restartApp = function () {
   device.reset();
 }
 
@@ -42,7 +43,7 @@ export function restartApp() {
  *   }
  * </pre>
  */
-export function waitFor(data) {
+module.exports.waitFor = function (data) {
   Object.assign(
     {
       state: 'exist',
@@ -62,7 +63,7 @@ export function waitFor(data) {
  * Tap on a button
  * @param {string} element
  */
-export function tapOnButton(element) {
+module.exports.tapOnButton = function (element) {
   device.touchAction(element, 'tap');
 }
 
@@ -71,7 +72,7 @@ export function tapOnButton(element) {
  * @param {string} string
  * @returns Returns the converted string
  */
-export function upperFirst(string) {
+function upperFirst(string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
@@ -87,7 +88,7 @@ export function upperFirst(string) {
  *   const to = { x: 25, y:50 }
  * </pre>
  */
-export function swipe(from, to) {
+module.exports.swipe = function (from, to) {
   const screenSize = device.windowHandleSize().value;
   const pressOptions = getDeviceScreenCoordinates(screenSize, from);
   const moveToScreenCoordinates = getDeviceScreenCoordinates(screenSize, to);
@@ -114,28 +115,28 @@ export function swipe(from, to) {
 /**
  * Swipe down
  */
-export function swipeDown() {
+module.exports.swipeDown = function () {
   swipe(SWIPE_DIRECTION.down.start, SWIPE_DIRECTION.down.end);
 }
 
 /**
  * Swipe Up
  */
-export function swipeUp() {
+module.exports.swipeUp = function () {
   swipe(SWIPE_DIRECTION.up.start, SWIPE_DIRECTION.up.end);
 }
 
 /**
  * Swipe left
  */
-export function swipeLeft() {
+module.exports.swipeLeft = function () {
   swipe(SWIPE_DIRECTION.left.start, SWIPE_DIRECTION.left.end);
 }
 
 /**
  * Swipe right
  */
-export function swipeRight() {
+module.exports.swipeRight = function () {
   swipe(SWIPE_DIRECTION.right.start, SWIPE_DIRECTION.right.end);
 }
 
@@ -157,7 +158,7 @@ function getDeviceScreenCoordinates(screenSize, coordinates) {
  * percentages of the screen.
  * @param {object} location { x: 50, y: 25 }
  */
-export function tapOnScreen(location = { x: 50, y: 25 }) {
+module.exports.tapOnScreen = function (location = { x: 50, y: 25 }) {
   const screenSize = device.windowHandleSize().value;
 
   device.touchPerform([
@@ -176,7 +177,7 @@ export function tapOnScreen(location = { x: 50, y: 25 }) {
  * @param element
  * @return {string}
  */
-export function getTextOfElement(element) {
+module.exports.getTextOfElement = function (element) {
   const visualText = element.getText(
     device.isAndroid ? ANDROID_TEXT_SELECTOR : IOS_TEXT_SELECTOR,
   );
@@ -186,7 +187,7 @@ export function getTextOfElement(element) {
 /**
  * Accept the alert text on a cross-platform way
  */
-export function acceptAlert() {
+module.exports.acceptAlert = function () {
   return device.isAndroid
     ? tapOnButton(ANDROID_ACCEPT_ALERT_SELECTOR)
     : device.alertAccept();
@@ -196,23 +197,23 @@ export function acceptAlert() {
  * Get the alert text on a cross-platform way
  * @return {string}
  */
-export function getAlertText() {
+module.exports.getAlertText = function () {
   const alertText = device.isAndroid
     ? `${$(ANDROID_ALERT_TITLE_SELECTOR).getText()} ${$(
         ANDROID_ALERT_MESSAGE_SELECTOR,
       ).getText()}`
     : device.alertText();
   return alertText.replace('\n', ' ');
-}
+};
 
 /**
  * Wait for the alert to exist
  */
-export function waitForAlert() {
+module.exports.waitForAlert = function () {
   waitFor({
     selector: device.isAndroid
       ? ANDROID_ALERT_TITLE_SELECTOR
       : IOS_ALERT_SELECTOR,
     state: 'exist',
   });
-}
+};

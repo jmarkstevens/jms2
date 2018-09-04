@@ -1,12 +1,13 @@
-import * as labels from '../../../src/config/labels';
-import { TEST_PREFIX, WAIT_FOR_STATE } from '../support/constants';
-import { waitFor } from '../support/utils';
+/* eslint-disable */
+const { tabNavigator } = require('../../../src/config/labels');
+const { TEST_PREFIX, WAIT_FOR_STATE } = require('../support/constants');
+const { waitFor } = require('../support/utils');
 
 const SCREEN_SELECTORS = {
-  native: `${TEST_PREFIX}${labels.tabNavigator.native}`,
-  graphql: `${TEST_PREFIX}${labels.tabNavigator.graphql}`,
-  maps: `${TEST_PREFIX}${labels.tabNavigator.maps}`,
-  all: `${TEST_PREFIX}${labels.tabNavigator.maps}`,
+  native: `${TEST_PREFIX}${tabNavigator.native}`,
+  graphql: `${TEST_PREFIX}${tabNavigator.graphql}`,
+  maps: `${TEST_PREFIX}${tabNavigator.maps}`,
+  all: `${TEST_PREFIX}${tabNavigator.maps}`,
 };
 
 /**
@@ -15,7 +16,7 @@ const SCREEN_SELECTORS = {
  * possible values
  */
 // eslint-disable-next-line
-export function waitForScreenToBeVisible(screen) {
+module.exports.waitForScreenToBeVisible = function (screen) {
   waitFor({
     selector: SCREEN_SELECTORS[screen.toLowerCase()],
     state: WAIT_FOR_STATE.VISIBLE,

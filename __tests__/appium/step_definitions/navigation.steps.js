@@ -1,12 +1,13 @@
-import { Then, When } from 'cucumber';
-import { selectScreenFromTabBar } from '../screen-objects/navigation';
-import { waitForScreenToBeVisible } from '../screen-objects/base';
+/* eslint-disable */
+const { Then, When } = require('cucumber');
+const { selectScreenFromTabBar } = require('../screen-objects/navigation');
+const { waitForScreenToBeVisible } = require('../screen-objects/base');
 
-When(/I select (All) from the tabbar/, screen => {
+When(/I select (All) from the tabbar/, function (screen) {
   selectScreenFromTabBar(screen);
 });
 
-Then(/the (Graphql) screen is visible/, screen => {
+Then(/the (Graphql) screen is visible/, function (screen) {
   waitForScreenToBeVisible(screen);
 });
 

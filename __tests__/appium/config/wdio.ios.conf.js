@@ -1,7 +1,7 @@
 const { config } = require('./wdio.shared.conf');
 
 const IOS_APP_PATH =
-  '/Users/jmarkstevens/Kykas/Active/rn/jms2/ios/build/Build/Products/Release-iphonesimulator/jms2.app';
+  '/Users/jmarkstevens/Kykas/Active/rn/jms2/ios/build/Build/Products/Debug-iphonesimulator/jms2.app';
 const deviceName = 'iPhone X';
 const platformName = 'iOS';
 const platformVersion = '11.4';

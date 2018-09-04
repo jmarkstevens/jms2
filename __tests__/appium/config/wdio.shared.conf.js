@@ -1,6 +1,6 @@
 const fs = require('fs-extra');
 const { argv } = require('yargs');
-const report = require('multiple-cucumber-html-reporter');
+// const report = require('multiple-cucumber-html-reporter');
 const chai = require('chai');
 
 exports.config = {
@@ -37,7 +37,6 @@ exports.config = {
       // '__tests__/appium/step_definitions/chat.steps.js',
     ],
     backtrace: false,
-    compiler: ['js:babel-register'],
     format: ['pretty'],
     colors: true,
     snippets: true,
