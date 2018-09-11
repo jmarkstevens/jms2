@@ -6,8 +6,8 @@ const { tapOnButton } = require('../support/utils');
 const TABBAR_SELECTORS = {
   native: `${TEST_PREFIX}${tabNavigator.native}`,
   graphql: `${TEST_PREFIX}${tabNavigator.graphql}`,
-  maps: `${TEST_PREFIX}${tabNavigator.maps}`,
-  all: `${TEST_PREFIX}${tabNavigator.maps}`,
+  maps: `~Maps`,
+  all: `~All`,
 };
 const HEADER_BACK_BUTTON = `${TEST_PREFIX}${
   stackNavigatorTitle.goBackAccessibilityLabel

@@ -7,7 +7,7 @@ When(/I select (All) from the tabbar/, function (screen) {
   selectScreenFromTabBar(screen);
 });
 
-Then(/the (Graphql) screen is visible/, function (screen) {
+Then(/the (All) screen is visible/, function (screen) {
   waitForScreenToBeVisible(screen);
 });
 

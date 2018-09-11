@@ -6,8 +6,10 @@ const { waitFor } = require('../support/utils');
 const SCREEN_SELECTORS = {
   native: `${TEST_PREFIX}${tabNavigator.native}`,
   graphql: `${TEST_PREFIX}${tabNavigator.graphql}`,
-  maps: `${TEST_PREFIX}${tabNavigator.maps}`,
-  all: `${TEST_PREFIX}${tabNavigator.maps}`,
+  maps: `~test-SomeMaps`,
+  all: `~test-AllMaps`,
+  mapstab: `~Maps`,
+  alltab: `~All`,
 };
 
 /**
@@ -19,7 +21,7 @@ const SCREEN_SELECTORS = {
 module.exports.waitForScreenToBeVisible = function (screen) {
   waitFor({
     selector: SCREEN_SELECTORS[screen.toLowerCase()],
-    state: WAIT_FOR_STATE.VISIBLE,
+    state: WAIT_FOR_STATE.EXIST,
     milliseconds: 25000,
   });
 }
