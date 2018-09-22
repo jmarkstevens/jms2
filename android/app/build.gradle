@@ -95,6 +95,7 @@ def enableProguardInReleaseBuilds = false
 
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
+    buildToolsVersion rootProject.ext.buildToolsVersion
 
     defaultConfig {
         applicationId "com.jms2"
@@ -133,10 +134,7 @@ android {
             }
         }
     }
-    buildToolsVersion '27.0.3'
 }
-
-apply from: "../../node_modules/react-native-vector-icons/fonts.gradle"
 
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
