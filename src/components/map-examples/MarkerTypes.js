@@ -1,7 +1,5 @@
 import React from 'react';
-import {
-  StyleSheet, View, Text, Dimensions,
-} from 'react-native';
+import { StyleSheet, View, Text, Dimensions } from 'react-native';
 import MapView, { Marker, ProviderPropType } from 'react-native-maps';
 import flagBlueImg from './assets/flag-blue.png';
 import flagPinkImg from './assets/flag-pink.png';
@@ -25,10 +23,12 @@ class MarkerTypes extends React.Component {
   }
 
   render() {
+    const { provider } = this.props;
+    const { marker1, marker2 } = this.state;
     return (
       <View style={styles.container}>
         <MapView
-          provider={this.props.provider}
+          provider={provider}
           style={styles.map}
           initialRegion={{
             latitude: LATITUDE,
@@ -38,29 +38,29 @@ class MarkerTypes extends React.Component {
           }}
         >
           <Marker
-            onPress={() => this.setState({ marker1: !this.state.marker1 })}
+            onPress={() => this.setState({ marker1: !marker1 })}
             coordinate={{
               latitude: LATITUDE + SPACE,
               longitude: LONGITUDE + SPACE,
             }}
             centerOffset={{ x: -18, y: -60 }}
             anchor={{ x: 0.69, y: 1 }}
-            image={this.state.marker1 ? flagBlueImg : flagPinkImg}
+            image={marker1 ? flagBlueImg : flagPinkImg}
           >
             <Text style={styles.marker}>X</Text>
           </Marker>
           <Marker
-            onPress={() => this.setState({ marker2: !this.state.marker2 })}
+            onPress={() => this.setState({ marker2: !marker2 })}
             coordinate={{
               latitude: LATITUDE - SPACE,
               longitude: LONGITUDE - SPACE,
             }}
             centerOffset={{ x: -42, y: -60 }}
             anchor={{ x: 0.84, y: 1 }}
-            image={this.state.marker2 ? flagBlueImg : flagPinkImg}
+            image={marker2 ? flagBlueImg : flagPinkImg}
           />
           <Marker
-            onPress={() => this.setState({ marker2: !this.state.marker2 })}
+            onPress={() => this.setState({ marker2: !marker2 })}
             coordinate={{
               latitude: LATITUDE + SPACE,
               longitude: LONGITUDE - SPACE,
@@ -68,7 +68,7 @@ class MarkerTypes extends React.Component {
             centerOffset={{ x: -42, y: -60 }}
             anchor={{ x: 0.84, y: 1 }}
             opacity={0.6}
-            image={this.state.marker2 ? flagBlueImg : flagPinkImg}
+            image={marker2 ? flagBlueImg : flagPinkImg}
           />
         </MapView>
       </View>

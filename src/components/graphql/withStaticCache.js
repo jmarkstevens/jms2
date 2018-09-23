@@ -1,24 +1,11 @@
 import React, { Component } from 'react';
-import {
-  Platform, StyleSheet, Text, TouchableOpacity, View,
-} from 'react-native';
-import ApolloClient from 'apollo-client';
-import { HttpLink } from 'apollo-link-http';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
-import Cache from '../../qraphql/cache';
 import { postsQuery, upvoteMutation, upvotedMutation } from '../../qraphql/gql';
+import StaticClient from '../../qraphql/staticClient';
 
-const ip = Platform.OS === 'ios' ? 'localhost' : '10.0.2.2';
-const uri = `http://${ip}:3000/graphql`;
-
-// eslint-disable-next-line
-const cache = new Cache().cache;
-
-const client = new ApolloClient({
-  cache,
-  link: new HttpLink({ uri }),
-});
+const { client } = new StaticClient();
 
 export default class WithStaticCache extends Component {
   state = { posts: [] };
@@ -27,7 +14,7 @@ export default class WithStaticCache extends Component {
     this.getPosts();
   }
 
-  doUpvoted = (upvotedPost) => {
+  doUpvoted = upvotedPost => {
     client
       .mutate({
         mutation: upvotedMutation,
@@ -36,12 +23,12 @@ export default class WithStaticCache extends Component {
       .then(() => {
         // console.log("upvotedPost then");
       })
-      .catch((err) => {
+      .catch(err => {
         console.log('catch', err);
       });
   };
 
-  onMutate = (post) => {
+  onMutate = post => {
     const newVote = post.votes + 1;
     client
       .mutate({
@@ -51,17 +38,17 @@ export default class WithStaticCache extends Component {
           inVote: newVote,
         },
       })
-      .then((data) => {
+      .then(data => {
         const { upvotePost } = data.data;
         this.doUpvoted(upvotePost);
         this.getPosts();
       })
-      .catch((err) => {
+      .catch(err => {
         console.log('catch', err);
       });
   };
 
-  getPosts = () => {
+  getPosts0 = () => {
     const observableQuery = client.watchQuery({
       query: postsQuery,
       pollInterval: 15000,
@@ -71,16 +58,16 @@ export default class WithStaticCache extends Component {
     });
   };
 
-  getPosts0 = () => {
+  getPosts = () => {
     client
       .query({
         query: postsQuery,
       })
-      .then((data) => {
+      .then(data => {
         const { posts } = data.data;
         this.setState({ posts });
       })
-      .catch((err) => {
+      .catch(err => {
         console.log('catch', err);
       });
   };
@@ -95,7 +82,11 @@ export default class WithStaticCache extends Component {
       return (
         <View key={key} style={styles.ul}>
           <TouchableOpacity onPress={() => this.onMutate(post)}>
-            <MaterialCommunityIcons name={iconName} size={25} color={tintColor} />
+            <MaterialCommunityIcons
+              name={iconName}
+              size={25}
+              color={tintColor}
+            />
           </TouchableOpacity>
           <Text>
             {post.title} {post.author.lastName} with {post.votes} votes.
